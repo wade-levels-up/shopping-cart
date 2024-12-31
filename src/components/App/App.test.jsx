@@ -1,10 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 
 describe('App', () => {
   it('renders correct heading', () => {
-    render(<App/>);
+    render(
+      <Router>
+        <App/>
+      </Router>
+    );
 
     screen.debug();
 

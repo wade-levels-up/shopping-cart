@@ -19,7 +19,7 @@ const StyledButton = styled.button`
     }
 `;
 
-const Button = ({onClick, $primary, children}) => {
+const Button = ({onClick, $primary, children = 'Click me!'}) => {
   return (
     <StyledButton onClick={onClick} $primary={$primary}>
       {children}
@@ -28,15 +28,10 @@ const Button = ({onClick, $primary, children}) => {
 }
 
 Button.propTypes = {
-  onClick: PropTypes.function,
+  onClick: PropTypes.func,
   $primary: PropTypes.bool,
   children: PropTypes.any
 }
-
-Button.defaultProps = {
-  children: 'Click me!',
-}
-
 
 
 export default Button;

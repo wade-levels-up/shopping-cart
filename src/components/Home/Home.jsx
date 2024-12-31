@@ -6,7 +6,7 @@ const StyledHome = styled.main`
     background-color: black;
 `;
 
-const Home = ({ children }) => {
+const Home = ({ children = 'I am the home component' }) => {
     return (
         <StyledHome>
             {children}
@@ -16,10 +16,6 @@ const Home = ({ children }) => {
 
 Home.propTypes = {
     children: PropTypes.any,
-}
-
-Home.defaultProps = {
-    children: 'I am the home component'
 }
 
 export default Home;
