@@ -1,14 +1,20 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Button from './Button'
 
 describe('Button', () => {
-  it('Renders a button to the screen', () => {
-    render(<Button/>);
+  it("When a button is clicked it calls the function passed as it's onClick prop", async () => {
+    const user = userEvent.setup();
 
-    screen.debug();
+    const handleClick = vi.fn() // Mock the function
+
+    render(<Button onClick={handleClick}>test</Button>);
+    const button = screen.getByRole('button', { name: 'test'});
+
+    await user.click(button);
 
     // check if App components renders headline
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(handleClick).toHaveBeenCalled();
   });
 });
