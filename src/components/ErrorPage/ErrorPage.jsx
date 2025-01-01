@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const StyledErrorPage = styled.main`
-    background-color: var(--color);
+    background-color: var(--bgColor);
     color: whitesmoke;
     padding: 10px;
     text-align: center;
@@ -15,7 +15,7 @@ const StyledErrorPage = styled.main`
 const ErrorPage = ({ bgColor = 'black' }) => {
     return (
         <StyledErrorPage style={{
-            '--color': bgColor,
+            '--bgColor': bgColor,
         }}>
             <h1>Error</h1>
             <p>Oops something went wrong</p>
