@@ -8,9 +8,11 @@ const StyledMenu = styled.nav`
     display: flex;
     justify-content: space-evenly;
     padding: 10px;
+    border: 1px solid black;
+    border-radius: 1rem;
 `
 
-const Menu = ({ bgColor = 'black'}) => {
+const Menu = ({ bgColor = 'transparent'}) => {
     return (
         <StyledMenu style={{
             '--bgColor': bgColor

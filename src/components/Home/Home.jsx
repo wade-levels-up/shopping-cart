@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 
 const StyledHome = styled.main`
     text-align: center;
-    background-color: black;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 1rem;
 `;
 
 const Home = ({ children = 'I am the home component' }) => {

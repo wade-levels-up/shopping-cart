@@ -1,21 +1,47 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import Card from "../Card/Card";
+import { useOutletContext } from "react-router-dom";
 
 const StyledShop = styled.main`
-    background-color: green;
+    background-color: var(--bgColor);
     color: beige;
+    display: grid;
+    padding: 15px;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: auto;
 `
 
-const Shop = ({ children = 'I am the shop component' }) => {
+const StyledH2 = styled.h2`
+    text-align: center;
+`
+
+const Shop = ({ bgColor = 'transparent'}) => {
+    const items = useOutletContext() || [];
+
     return (
-        <StyledShop>
-            {children}
-        </StyledShop>
+        <>
+            <StyledH2>Shop</StyledH2>
+            <StyledShop style={{
+            'bgColor': bgColor
+            }}>
+            {items.map((item) => (
+                <Card 
+                    key={item.id} 
+                    title={item.title}
+                    image={item.image}
+                    desc={item.description}
+                    price={item.price}
+                />
+            ))}
+            </StyledShop>
+        </>
     )
 }
 
 Shop.propTypes = {
-    children: PropTypes.any
+    bgColor: PropTypes.string,
 }
 
 export default Shop;
