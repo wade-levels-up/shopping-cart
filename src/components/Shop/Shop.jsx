@@ -18,7 +18,7 @@ const StyledH2 = styled.h2`
 `
 
 const Shop = ({ bgColor = 'transparent'}) => {
-    const items = useOutletContext() || [];
+    const { items } = useOutletContext() || [];
 
     return (
         <>

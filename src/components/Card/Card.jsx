@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import Button from "../Button/Button";
 
 const StyledCard = styled.article`
     background-color: var(--bgColor);
@@ -24,6 +25,24 @@ const StyledCard = styled.article`
         font-size: 16px;
         text-align: center;
     }
+
+    & details {
+        text-align: center;
+        padding: 0.5rem 5rem;
+        width: 100%;
+    }
+
+    & details p {
+        text-align: left;
+    }
+
+    & div {
+        display: flex;
+        height: 1.5rem;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+    }
 `
 
 const Card = ({ bgColor = 'transparent', title, image, desc, price}) => {
@@ -33,8 +52,14 @@ const Card = ({ bgColor = 'transparent', title, image, desc, price}) => {
         }}>
             <h3>{title}</h3>
             <img src={image} alt=''></img>
-            <p>{desc}</p>
-            <p>${price}</p>
+            <details>
+                <summary>Details</summary>
+                <p>{desc}</p>
+            </details>
+            <div>
+                <p>${price}</p>
+                <Button>Add to cart</Button>
+            </div>
         </StyledCard>
     )
 }
