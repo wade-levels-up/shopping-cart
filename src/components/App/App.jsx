@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
-import Button from "../Button/Button"
-import Home from "../Home/Home";
+import styled from "styled-components";
+import { Outlet } from "react-router-dom";
+
+const StyledApp = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 function App() {
 
@@ -9,20 +13,14 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Hello World</h1>
-      <nav>
-        <ul>
-          <li>
-            <Link to="home">Home page</Link>
-          </li>
-        </ul>
-      </nav>
-      <Button $primary>Button</Button>
-      <Button></Button>
-      <Button $primary onClick={handleClick}></Button>
-      <Home></Home>
-    </div>
+    <StyledApp>      
+      <header>
+        <h1>Shopping Cart</h1>
+      </header>
+      <nav></nav>
+      <Outlet />
+      <footer></footer>
+    </StyledApp>
   )
 }
 
