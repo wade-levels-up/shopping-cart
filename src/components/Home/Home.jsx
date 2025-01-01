@@ -1,23 +1,21 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 const StyledHome = styled.main`
     text-align: center;
     background-color: transparent;
     border: 1px solid black;
     border-radius: 1rem;
+    flex-grow: 1;
 `;
 
-const Home = ({ children = 'I am the home component' }) => {
+const Home = () => {
     return (
         <StyledHome>
-            {children}
+           <p>Welcome to ItemMart!</p><br></br>
+           <p>Click shop to browse our items</p><br></br>
+           <p>We keep a selection of clothing, technology and accesories</p>
         </StyledHome>
     )
-}
-
-Home.propTypes = {
-    children: PropTypes.any,
 }
 
 export default Home;

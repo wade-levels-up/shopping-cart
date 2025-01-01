@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Button from "../Button/Button"
+import { Link } from "react-router-dom";
 
 const StyledMenu = styled.nav`
     background-color: var(--bgColor);
@@ -12,13 +13,18 @@ const StyledMenu = styled.nav`
     border-radius: 1rem;
 `
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: whitesmoke;
+`
+
 const Menu = ({ bgColor = 'transparent'}) => {
     return (
         <StyledMenu style={{
             '--bgColor': bgColor
         }}>
-            <Button>Home</Button>
-            <Button>Shop</Button>
+            <Button><StyledLink to='/'>Home</StyledLink></Button>
+            <Button><StyledLink to='shop'>Shop</StyledLink></Button>
         </StyledMenu>
     )
 }
