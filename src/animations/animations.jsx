@@ -33,3 +33,23 @@ export const gradientShift = keyframes`
     background-position: 0% 50%;
   }
 `
+
+export const slideInRight = keyframes`
+  from {
+    transform: translateX(150%);
+  }
+
+  to {
+    transform: translateX(25%);
+  }
+`
+
+export const slideOutRight = keyframes`
+  from {
+    transform: translateX(25%);
+  }
+
+  to {
+    transform: translateX(150%);
+  }
+`

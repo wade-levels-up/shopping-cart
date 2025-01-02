@@ -48,7 +48,7 @@ const StyledIcon = styled(Icon)`
     }
 `
 
-const Menu = ({ bgColor = 'rgba(36, 36, 36, 0.7)', totalCart }) => {
+const Menu = ({ bgColor = 'rgba(36, 36, 36, 0.7)', totalCart, changeCartVisibility}) => {
 
     return (
         <StyledMenu style={{
@@ -56,7 +56,7 @@ const Menu = ({ bgColor = 'rgba(36, 36, 36, 0.7)', totalCart }) => {
         }}>
             <Button><StyledLink to='/'>Home</StyledLink></Button>
             <Button><StyledLink to='shop'>Shop</StyledLink></Button>
-            <Button><StyledIcon path={mdiShoppingOutline} size={1}/><span>{totalCart}</span></Button>
+            <Button onClick={changeCartVisibility}><StyledIcon path={mdiShoppingOutline} size={1}/><span>{totalCart}</span></Button>
         </StyledMenu>
     )
 }
@@ -64,6 +64,7 @@ const Menu = ({ bgColor = 'rgba(36, 36, 36, 0.7)', totalCart }) => {
 Menu.propTypes = {
     bgColor: PropTypes.string,
     totalCart: PropTypes.number,
+    changeCartVisibility: PropTypes.func,
 }
 
 export default Menu;

@@ -6,8 +6,9 @@ import Icon from '@mdi/react';
 import { mdiLeaf } from '@mdi/js';
 import githubLogo from '../../assets/github.svg';
 import reactLogo from '../../assets/react.svg';
-import { spin, skew, gradientShift } from "../../animations/animations";
+import { spin, skew } from "../../animations/animations";
 import dummyData from "../../dummyData";
+import Cart from "../Cart/Cart";
 
 const StyledApp = styled.div`
   display: flex;
@@ -20,9 +21,7 @@ const StyledApp = styled.div`
   & h1 {
     padding-left: 40px;
     text-align: center;
-    animation: ${gradientShift} 30s ease-in-out infinite;
-    background: linear-gradient(90deg, rgba(25, 25, 25, 0.5) 49.5%, #00ff1e 50%, rgba(25, 25, 25, 0.5) 50.5%);
-    background-size: 200% 200%;
+    background-color: rgba(25, 25, 25, 0.5);
     margin: 10px;
   }
 
@@ -64,6 +63,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cart, setCart] = useState([]);
+  const [cartVisible, setCartVisible] = useState(false);
 
   useEffect(() => {
     // // Use the dummy data instead of fetching from the API
@@ -80,7 +80,7 @@ function App() {
             })
             .then(data => setItems(data))
             .catch((error) => {
-              alert`Experienced an error: ${error} retrieving server data. Loading dummy data in place of items from API`;
+                alert`Experienced an error: ${error} retrieving server data. Loading dummy data in place of items from API`;
                 setItems(dummyData);
                 setLoading(false);
             })
@@ -110,6 +110,14 @@ function App() {
     }
   }
 
+  function changeCartVisibility() {
+    if (cartVisible === false) {
+      setCartVisible(true);
+    } else {
+      setCartVisible(false);
+    }
+  }
+
   let totalCart = cart.reduce((acc, cur) => {
     return acc + cur.quantity;
   }, 0);
@@ -119,12 +127,13 @@ function App() {
   if (loading) return <p style={{ display: 'flex', width: '100vw', justifyContent: 'center', padding: '30px'}}>Loading...</p>;
 
   return (
-    <StyledApp>      
+    <StyledApp>   
       <header>
         <h1>itemMart<StyledIcon path={mdiLeaf} size={1.3} /></h1>
       </header>
-      <Menu cart={cart} totalCart={totalCart}/>
+      <Menu cart={cart} totalCart={totalCart} changeCartVisibility={changeCartVisibility}/>
       <Outlet context={{items, loading, error, addItemToCart, totalCart}}/>
+      <Cart cart={cart} items={items} $visible={cartVisible} changeCartVisibility={changeCartVisibility}/>
       <footer>
         <a href="https://github.com/wade-levels-up" target="_blank">
           <img src={githubLogo} alt="github logo" width="24" height="24"/>
