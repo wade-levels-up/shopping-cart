@@ -29,6 +29,7 @@ const Shop = ({ bgColor = 'transparent'}) => {
             {items.map((item) => (
                 <Card 
                     key={item.id} 
+                    keyCard={item.id}
                     title={item.title}
                     image={item.image}
                     desc={item.description}

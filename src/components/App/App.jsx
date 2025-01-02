@@ -6,7 +6,8 @@ import Icon from '@mdi/react';
 import { mdiLeaf } from '@mdi/js';
 import githubLogo from '../../assets/github.svg';
 import reactLogo from '../../assets/react.svg';
-import { spin, skew } from "../../animations/animations";
+import { spin, skew, gradientShift } from "../../animations/animations";
+import dummyData from "../../dummyData";
 
 const StyledApp = styled.div`
   display: flex;
@@ -17,7 +18,11 @@ const StyledApp = styled.div`
   position: relative;
 
   & h1 {
+    padding-left: 40px;
     text-align: center;
+    animation: ${gradientShift} 12s linear infinite;
+    background: linear-gradient(90deg, #252525 40%, blue 60%);
+    background-size: 200% 200%;
   }
 
   & footer {
@@ -42,7 +47,7 @@ const StyledApp = styled.div`
 
   & footer img[alt="react logo"] {
     animation: ${spin} 6s linear infinite;
-    filter: drop-shadow(0px 0px 1px cyan);
+    filter: drop-shadow(0px 0px 1px blue);
   }
 `
 
@@ -53,32 +58,46 @@ const StyledIcon = styled(Icon)`
 `
 
 
-
-
 function App() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-            .then((res) => {
-              if (res.status >= 400) {
-                throw new Error("Server error")
-              }
-              return res.json()
-            })
-            .then(data => setItems(data))
-            .catch(error => setError(error))
-            .finally(setLoading(false));
+    // Use the dummy data instead of fetching from the API
+    setItems(dummyData);
+    setLoading(false);
+
+    // Uncomment to use real data from an API
+    // fetch('https://fakestoreapi.com/products', { mode: 'cors' })
+    //         .then((res) => {
+    //           if (res.status >= 400) {
+    //             throw new Error("Server error")
+    //           }
+    //           return res.json()
+    //         })
+    //         .then(data => setItems(data))
+    //         .catch((error) => {
+    //             setError(error)
+    //         })
+    //         .finally(setLoading(false));
   }, []);
 
-  // function handleClick() {
-  //   alert('You clicked a button!');
-  // }
+  function addItemToCart(item) {
+    // Check if the item is already in the cart
+    const itemExists = cart.some((entry) => entry.id === item.id);
+  
+    if (itemExists) {
+      alert(`Item of ID:${item.id} already in cart...`);
+    } else {
+      setCart([...cart, item]);
+    }
+  }
 
-  if (error) return <p>A network error was encountered</p>;
-  if (loading) return <p>Loading...</p>;
+
+  if (error) return <p style={{ display: 'flex', width: '100vw', justifyContent: 'center', padding: '30px'}}>A network error was encountered</p>;
+  if (loading) return <p style={{ display: 'flex', width: '100vw', justifyContent: 'center', padding: '30px'}}>Loading...</p>;
 
   return (
     <StyledApp>      
@@ -86,7 +105,7 @@ function App() {
         <h1>itemMart<StyledIcon path={mdiLeaf} size={1.3} /></h1>
       </header>
       <Menu />
-      <Outlet context={{items, loading, error}}/>
+      <Outlet context={{items, loading, error, addItemToCart}}/>
       <footer>
         <a href="https://github.com/wade-levels-up" target="_blank">
           <img src={githubLogo} alt="github logo" width="24" height="24"/>
