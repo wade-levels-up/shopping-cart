@@ -89,7 +89,14 @@ function App() {
     const itemExists = cart.some((entry) => entry.id === item.id);
   
     if (itemExists) {
-      alert(`Item of ID:${item.id} already in cart...`);
+      let newCart = cart.map((entry) => {
+        if (entry.id === item.id) {
+          return { id: entry.id, quantity: (+entry.quantity + +item.quantity) }
+        } else {
+          return entry;
+        }
+      });
+      setCart(newCart);
     } else {
       setCart([...cart, item]);
     }
