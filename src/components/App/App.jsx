@@ -20,9 +20,10 @@ const StyledApp = styled.div`
   & h1 {
     padding-left: 40px;
     text-align: center;
-    animation: ${gradientShift} 12s linear infinite;
-    background: linear-gradient(90deg, #252525 40%, blue 60%);
+    animation: ${gradientShift} 30s ease-in-out infinite;
+    background: linear-gradient(90deg, rgba(25, 25, 25, 0.5) 49.5%, #00ff1e 50%, rgba(25, 25, 25, 0.5) 50.5%);
     background-size: 200% 200%;
+    margin: 10px;
   }
 
   & footer {
@@ -65,29 +66,36 @@ function App() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    // Use the dummy data instead of fetching from the API
-    setItems(dummyData);
-    setLoading(false);
+    // // Use the dummy data instead of fetching from the API
+    // setItems(dummyData);
+    // setLoading(false);
 
-    // Uncomment to use real data from an API
-    // fetch('https://fakestoreapi.com/products', { mode: 'cors' })
-    //         .then((res) => {
-    //           if (res.status >= 400) {
-    //             throw new Error("Server error")
-    //           }
-    //           return res.json()
-    //         })
-    //         .then(data => setItems(data))
-    //         .catch((error) => {
-    //             setError(error)
-    //         })
-    //         .finally(setLoading(false));
+    // Use real data from an API
+    fetch('https://fakestoreapi.com/products', { mode: 'cors' })
+            .then((res) => {
+              if (res.status >= 400) {
+                throw new Error("Server error")
+              }
+              return res.json()
+            })
+            .then(data => setItems(data))
+            .catch((error) => {
+              alert`Experienced an error: ${error} retrieving server data. Loading dummy data in place of items from API`;
+                setItems(dummyData);
+                setLoading(false);
+            })
+            .finally(setLoading(false));
   }, []);
 
   function addItemToCart(item) {
     // Check if the item is already in the cart
     const itemExists = cart.some((entry) => entry.id === item.id);
-  
+
+    if (totalCart >= 900) {
+      alert('Whoa, hold up big spender!');
+      return;
+    }
+
     if (itemExists) {
       let newCart = cart.map((entry) => {
         if (entry.id === item.id) {
@@ -98,9 +106,13 @@ function App() {
       });
       setCart(newCart);
     } else {
-      setCart([...cart, item]);
+      setCart([...cart, { id: item.id, quantity: +item.quantity }]);
     }
   }
+
+  let totalCart = cart.reduce((acc, cur) => {
+    return acc + cur.quantity;
+  }, 0);
 
 
   if (error) return <p style={{ display: 'flex', width: '100vw', justifyContent: 'center', padding: '30px'}}>A network error was encountered</p>;
@@ -111,8 +123,8 @@ function App() {
       <header>
         <h1>itemMart<StyledIcon path={mdiLeaf} size={1.3} /></h1>
       </header>
-      <Menu />
-      <Outlet context={{items, loading, error, addItemToCart}}/>
+      <Menu cart={cart} totalCart={totalCart}/>
+      <Outlet context={{items, loading, error, addItemToCart, totalCart}}/>
       <footer>
         <a href="https://github.com/wade-levels-up" target="_blank">
           <img src={githubLogo} alt="github logo" width="24" height="24"/>

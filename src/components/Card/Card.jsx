@@ -12,8 +12,17 @@ const StyledCard = styled.article`
     align-items: center;
     padding: 15px;
     height: fit-content;
-    box-shadow: 1px 1px 5px black;
+    box-shadow: 1px 1px 3px black;
     border-radius: 30px;
+    transition: transform 500ms ease;
+
+    &:hover {
+        box-shadow: 1px 1px 3px #c1de96;
+    }
+
+    &:focus {
+        box-shadow: 1px 1px 3px #c1de96;
+    }
 
     & h3 {
         font-size: 16px;
@@ -62,7 +71,8 @@ const StyledCard = styled.article`
     }
 
     & input {
-        width: 3rem;
+        text-align: center;
+        width: 4rem;
         font-size: 16px;
         padding: 5px 10px;
         border-radius: 15px;
@@ -72,7 +82,7 @@ const StyledCard = styled.article`
 const Card = ({ bgColor = 'transparent', keyCard, title, image, desc, price}) => {
     const [quantity, setQuantity] = useState(1);
 
-    const { addItemToCart } = useOutletContext();
+    const { addItemToCart, totalCart } = useOutletContext();
 
     function handleInput(e) {
         setQuantity(e.target.value);
@@ -80,6 +90,11 @@ const Card = ({ bgColor = 'transparent', keyCard, title, image, desc, price}) =>
 
     function handleSubmit(e) {
         e.preventDefault();
+        console.log(totalCart);
+        if (totalCart >= 999) {
+            alert('Cart cannot exceed 999 items');
+            return;
+        }
         addItemToCart({ id: keyCard, quantity: quantity });
       }
 

@@ -15,6 +15,21 @@ const StyledMenu = styled.nav`
     position: sticky;
     top: -2px;
     border-bottom: 2px solid whitesmoke;
+
+    & span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        padding: 0.8rem;
+        background-color: whitesmoke;
+        color: black;
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        right: -12px;
+        top: -12px;
+    }
 `
 
 const StyledLink = styled(Link)`
@@ -28,26 +43,27 @@ const StyledLink = styled(Link)`
 
 const StyledIcon = styled(Icon)`
     color: whitesmoke;
-
     &:hover {
         color: black;
     }
 `
 
-const Menu = ({ bgColor = 'rgba(36, 36, 36, 0.7)'}) => {
+const Menu = ({ bgColor = 'rgba(36, 36, 36, 0.7)', totalCart }) => {
+
     return (
         <StyledMenu style={{
             '--bgColor': bgColor
         }}>
             <Button><StyledLink to='/'>Home</StyledLink></Button>
             <Button><StyledLink to='shop'>Shop</StyledLink></Button>
-            <Button><StyledIcon path={mdiShoppingOutline} size={1}/></Button>
+            <Button><StyledIcon path={mdiShoppingOutline} size={1}/><span>{totalCart}</span></Button>
         </StyledMenu>
     )
 }
 
 Menu.propTypes = {
     bgColor: PropTypes.string,
+    totalCart: PropTypes.number,
 }
 
 export default Menu;
