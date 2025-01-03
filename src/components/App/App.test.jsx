@@ -19,10 +19,10 @@ describe('App', () => {
     );
 
     // Check if App component renders headline
-    expect(screen.getByRole('heading', { name: "Shopping Cart" })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: "itemMart" })).toBeInTheDocument();
   });
 
-  it('renders header, main, footer, and nav', () => {
+  it('renders header, main(img role), footer, and nav', () => {
     render(
       <MemoryRouter initialEntries={['/home']}>
         <Routes>
@@ -35,7 +35,7 @@ describe('App', () => {
     );
 
     expect(screen.getByRole('banner')).toBeInTheDocument();
-    expect(screen.getByRole('main')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Interior decor with leafy plant' })).toBeInTheDocument();
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
