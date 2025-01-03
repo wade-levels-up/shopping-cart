@@ -8,9 +8,11 @@ const StyledButton = styled.button`
     color: #c1de96;
     padding: 0.25em 1em;
     position: relative;
-
-    ${props => props.$primary && css`
-      background-color: #c1de96;
+    font-size: 16px;
+    
+    ${props => props.$color && css`
+      background-color: transparent;
+      border: 2px solid black;
       color: #000000;
     `};
 
@@ -27,9 +29,9 @@ const StyledButton = styled.button`
     }
 `;
 
-const Button = ({onClick, $primary, children = 'Click me!'}) => {
+const Button = ({onClick, $color, children = 'Click me!'}) => {
   return (
-    <StyledButton onClick={onClick} $primary={$primary}>
+    <StyledButton onClick={onClick} $color={$color}>
       {children}
     </StyledButton>
   )
@@ -37,7 +39,7 @@ const Button = ({onClick, $primary, children = 'Click me!'}) => {
 
 Button.propTypes = {
   onClick: PropTypes.func,
-  $primary: PropTypes.bool,
+  $color: PropTypes.string,
   children: PropTypes.any
 }
 

@@ -34,7 +34,8 @@ const StyledCart = styled.aside`
         display: flex;
         width: 100%;
         height: fit-content;
-        justify-content: space-evenly;
+        justify-content: flex-start;
+        gap: 16px;
     }
 
     & ul {
@@ -48,6 +49,7 @@ const StyledCart = styled.aside`
 
     & h4 {
         font-size: 12px;
+        text-wrap: pretty;
     }
 
     & li {
@@ -56,8 +58,8 @@ const StyledCart = styled.aside`
         padding: 8px;
         display: grid;
         grid-template-columns: 20% 80%; 
-        grid-template-rows: 60px 20px;
-        gap: 10px;
+        grid-template-rows: 60px 30px;
+        gap: 5px;
     }
 
     & li div[role='img'] {
@@ -68,9 +70,14 @@ const StyledCart = styled.aside`
         background-repeat: no-repeat;
         background-color: white;
     }
+
+    & .cartCardBottom {
+        grid-column: 1 / 3;
+        grid-row: 2 / 3;
+    }
 `
 
-const Cart = ({ cart, items, $visible, changeCartVisibility }) => {
+const Cart = ({ cart, items, $visible, changeCartVisibility, removeItemFromCart }) => {
     const [slideOut, setSlideOut] = useState(false);
 
     function handleButtonClick() {
@@ -89,17 +96,16 @@ const Cart = ({ cart, items, $visible, changeCartVisibility }) => {
         <StyledCart $visible={$visible} $slideOut={slideOut}>
             <div className="slideOverRight" onAnimationEnd={console.log('it ended')}>
                 <div>
+                    <Button onClick={handleButtonClick} $color={'black'}>x</Button>
                     <h3>Cart</h3>
-                    <Button onClick={handleButtonClick}>x</Button>
                 </div>
                 <ul>
                     {itemCart.map((item) => (
                         <li key={item.id}>
                             <div role='img' aria-label='' style={{ backgroundImage: `url(${item.image})`}}></div>
                             <h4>{item.title}</h4>
-                            <span>Quantity</span>
-                            <div>
-                                x
+                            <div className="cartCardBottom">
+                                <Button onClick={() => removeItemFromCart(item.id)} $color={'red'}>Remove</Button>
                             </div>
                         </li>
                     ))}
@@ -114,6 +120,7 @@ Cart.propTypes = {
     items: PropTypes.array,
     changeCartVisibility: PropTypes.func,
     $visible: PropTypes.any,
+    removeItemFromCart: PropTypes.func,
 }
 
 export default Cart;

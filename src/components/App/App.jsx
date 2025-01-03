@@ -110,6 +110,11 @@ function App() {
     }
   }
 
+  function removeItemFromCart(id) {
+    let newCart = cart.filter((item) => item.id !== id);
+    setCart(newCart);
+  }
+
   function changeCartVisibility() {
     if (cartVisible === false) {
       setCartVisible(true);
@@ -133,7 +138,7 @@ function App() {
       </header>
       <Menu cart={cart} totalCart={totalCart} changeCartVisibility={changeCartVisibility}/>
       <Outlet context={{items, loading, error, addItemToCart, totalCart}}/>
-      <Cart cart={cart} items={items} $visible={cartVisible} changeCartVisibility={changeCartVisibility}/>
+      <Cart cart={cart} items={items} $visible={cartVisible} changeCartVisibility={changeCartVisibility} removeItemFromCart={removeItemFromCart}/>
       <footer>
         <a href="https://github.com/wade-levels-up" target="_blank">
           <img src={githubLogo} alt="github logo" width="24" height="24"/>
