@@ -8,7 +8,7 @@ const StyledHome = styled.main`
     border-radius: 1rem;
     flex-grow: 1;
     background-image: url('../src/assets/tu-tu-QZGQO3NvsLo-unsplash.jpg');
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
@@ -19,8 +19,8 @@ const StyledHome = styled.main`
     margin: 10px;
 
     & p, h2 {
-        background-color: rgba(232, 232, 232, 0.6);
-        padding: 5px 15px;
+        background-color: rgba(232, 232, 232, 0.8);
+        padding: 3px 10px;
         width: fit-content;
         border-radius: 16px;
     }
@@ -30,9 +30,8 @@ const Home = () => {
     return (
         <StyledHome>
            <h2>Home</h2>
-           <p>Welcome to ItemMart!</p>
+           <p>Welcome to itemMart</p>
            <p>Click shop to browse our items</p>
-           <p>We keep a selection of clothing, technology and accesories</p>
         </StyledHome>
     )
 }
