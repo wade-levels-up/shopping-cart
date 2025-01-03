@@ -20,7 +20,7 @@ const StyledHome = styled.main`
 
 const Home = () => {
     return (
-        <StyledHome></StyledHome>
+        <StyledHome role='img' aria-label='Interior decor with leafy plant'></StyledHome>
     )
 }
 
