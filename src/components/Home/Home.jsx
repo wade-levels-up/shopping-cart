@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import sampleImage from '../../assets/tutubackground.jpg'
 
 const StyledHome = styled.main`
     text-align: center;
@@ -6,7 +7,7 @@ const StyledHome = styled.main`
     font-weight: 600;
     background-color: transparent;
     flex-grow: 1;
-    background-image: url('../src/assets/tutubackground.jpg');
+    background-image: url(${sampleImage});
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
