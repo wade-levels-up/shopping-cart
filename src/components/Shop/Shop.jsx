@@ -13,16 +13,11 @@ const StyledShop = styled.main`
     grid-auto-rows: auto;
 `
 
-const StyledH2 = styled.h2`
-    text-align: center;
-`
-
 const Shop = ({ bgColor = 'transparent'}) => {
     const { items } = useOutletContext() || [];
 
     return (
         <>
-            <StyledH2>Shop</StyledH2>
             <StyledShop style={{
             'bgColor': bgColor
             }}>

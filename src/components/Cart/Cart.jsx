@@ -25,6 +25,13 @@ const StyledCart = styled.aside`
     ${props => props.$visible && css`
         display: block;
     `};
+
+    & .closeCartBtn {
+        background-color: transparent;
+        font-size: 22px;
+        border: none;
+        color: black;
+    }
     
     & .slideOverRight {
         background-color: rgba(234, 234, 234, 0.95);
@@ -149,7 +156,7 @@ const Cart = ({ cart, $visible, changeCartVisibility, removeItemFromCart, update
         <StyledCart $visible={$visible} $slideOut={slideOut}>
             <div className="slideOverRight">
                 <div>
-                    <Button onClick={handleButtonClick} $color={'black'}>x</Button>
+                    <button className="closeCartBtn" onClick={handleButtonClick}>x</button>
                     <Icon path={mdiShoppingOutline} size={1} />
                     <h3>Cart</h3>
                 </div>
