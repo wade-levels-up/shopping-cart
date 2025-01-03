@@ -21,7 +21,6 @@ const StyledApp = styled.div`
   & h1 {
     padding-left: 40px;
     text-align: center;
-    background-color: rgba(25, 25, 25, 0.5);
     margin: 10px;
   }
 
@@ -150,7 +149,7 @@ function App() {
         <h1>itemMart<StyledIcon path={mdiLeaf} size={1.3} /></h1>
       </header>
       <Menu cart={cart} totalCart={totalCart} changeCartVisibility={changeCartVisibility}/>
-      <Outlet context={{items, loading, error, addItemToCart, totalCart}}/>
+      <Outlet context={{items, loading, error, addItemToCart, totalCart, changeCartVisibility}}/>
       <Cart cart={cart} items={items} $visible={cartVisible} changeCartVisibility={changeCartVisibility} removeItemFromCart={removeItemFromCart} updateItemQuantity={updateItemQuantity}/>
       <footer> 
         <a href="https://github.com/wade-levels-up" target="_blank">

@@ -11,7 +11,6 @@ const StyledMenu = styled.nav`
     display: flex;
     justify-content: space-evenly;
     padding: 15px 20px;
-    border-radius: 1rem;
     position: sticky;
     top: -2px;
     border-bottom: 2px solid whitesmoke;

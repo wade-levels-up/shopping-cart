@@ -82,7 +82,7 @@ const StyledCard = styled.article`
 const Card = ({ bgColor = 'transparent', keyCard, title, image, desc, price}) => {
     const [quantity, setQuantity] = useState(1);
 
-    const { addItemToCart } = useOutletContext();
+    const { addItemToCart, changeCartVisibility } = useOutletContext();
 
     function handleInput(e) {
         setQuantity(e.target.value);
@@ -90,6 +90,7 @@ const Card = ({ bgColor = 'transparent', keyCard, title, image, desc, price}) =>
 
     function handleSubmit(e) {
         e.preventDefault();
+        changeCartVisibility()
         addItemToCart({ id: keyCard, quantity: quantity, image: image, price: price, title: title });
     }
 

@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 const StyledButton = styled.button`
     background: transparent;
     border-radius: 12px;
-    border: 2px solid #c1de96;
     color: #c1de96;
+    border: none;
     padding: 0.10em 0.8em;
     position: relative;
     font-size: 16px;
