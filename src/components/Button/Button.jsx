@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const StyledButton = styled.button`
     background: transparent;
     border-radius: 12px;
-    color: #c1de96;
+    color: whitesmoke;
     border: none;
     padding: 0.10em 0.8em;
     position: relative;
@@ -20,14 +20,12 @@ const StyledButton = styled.button`
     `};
 
     &:hover {
-      background-color: #c1de96;
-      color: black;
+      outline: 2px solid rgb(210, 245, 153);
       cursor: pointer;
     }
 
     &:focus {
-      background-color: #c1de96;
-      color: black;
+      outline: 2px solid rgb(210, 245, 153);
       cursor: pointer;
     }
 `;

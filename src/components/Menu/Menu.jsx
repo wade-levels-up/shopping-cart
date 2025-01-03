@@ -37,16 +37,10 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     color: whitesmoke;
 
-    &:hover {
-        color: black;
-    }
 `
 
 const StyledIcon = styled(Icon)`
     color: whitesmoke;
-    &:hover {
-        color: black;
-    }
 `
 
 const Menu = ({ bgColor = 'rgba(36, 36, 36, 0.9)', totalCart, changeCartVisibility}) => {

@@ -117,6 +117,12 @@ const StyledCart = styled.aside`
         outline: 2px solid blue;
     }
 
+    & button:hover {
+        background-color: transparent;
+        outline: 2px solid blue;
+        cursor: pointer;
+    }
+
     & .checkout {
         display: flex;
         flex-direction: column;
