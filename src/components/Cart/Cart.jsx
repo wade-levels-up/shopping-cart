@@ -33,7 +33,7 @@ const StyledCart = styled.aside`
         padding: 10px;
         width: 80%;
         height: 100%;
-        animation: ${props => props.$slideOut ? css`${slideOutRight} 1s ease-out forwards` : css`${slideInRight} 1s ease-out forwards`};
+        animation: ${props => props.$slideOut ? css`${slideOutRight} 0.5s ease-out forwards` : css`${slideInRight} 0.5s ease-in forwards`};
     }
 
     & .slideOverRight div {
@@ -155,7 +155,8 @@ const Cart = ({ cart, $visible, changeCartVisibility, removeItemFromCart, update
                 </div>
                 <hr></hr>
                 <ul>
-                    {cart.map((item) => (
+                    {cart.length === 0 ? <p>Looks like your cart is empty... 😕</p> :
+                    cart.map((item) => (
                         <li key={item.id}>
                             <div role='img' aria-label='' style={{ backgroundImage: `url(${item.image})`}}></div>
                             <h4>{item.title}</h4>

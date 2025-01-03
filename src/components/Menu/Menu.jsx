@@ -20,15 +20,16 @@ const StyledMenu = styled.nav`
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 50%;
-        padding: 0.8rem;
+        border-radius: 5px;
+        padding: 0.5rem;
         background-color: whitesmoke;
         color: black;
-        width: 18px;
+        max-width: 3.5ch;
         height: 18px;
         position: absolute;
-        right: -12px;
-        top: -12px;
+        right: -10px;
+        top: -10px;
+        transform: translateX(10px);
     }
 `
 

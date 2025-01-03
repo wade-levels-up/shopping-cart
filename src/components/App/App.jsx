@@ -44,12 +44,12 @@ const StyledApp = styled.div`
   }
 
   & footer img {
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(103%) contrast(103%) drop-shadow(0px 0px 1px rgb(160, 252, 0));
   }
 
   & footer img[alt="react logo"] {
     animation: ${spin} 6s linear infinite;
-    filter: drop-shadow(0px 0px 1px blue);
+    filter: saturate(0%) contrast(120%) drop-shadow(0px 0px 1px rgb(160, 252, 0));
   }
 `
 

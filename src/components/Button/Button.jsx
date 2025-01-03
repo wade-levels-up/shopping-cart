@@ -9,6 +9,9 @@ const StyledButton = styled.button`
     padding: 0.10em 0.8em;
     position: relative;
     font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
     ${props => props.$color && css`
       background-color: transparent;
