@@ -36,6 +36,7 @@ const StyledCart = styled.aside`
         height: fit-content;
         justify-content: flex-start;
         gap: 16px;
+        margin-bottom: 8px;
     }
 
     & ul {
@@ -45,6 +46,7 @@ const StyledCart = styled.aside`
         text-decoration: none;
         list-style: none;
         margin-top: 16px;
+        overflow: scroll;
     }
 
     & h4 {
@@ -75,22 +77,40 @@ const StyledCart = styled.aside`
         grid-column: 1 / 3;
         grid-row: 2 / 3;
     }
+
+    & .cartCardBottom div {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 0px 5px;
+    }
+
+    & .incBtn {
+        border-radius: 50%;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: transparent;
+        color: black;
+        border: 2px solid black;
+    }
+
+    & button:focus {
+        background-color: transparent;
+        outline: 2px solid blue;
+    }
 `
 
-const Cart = ({ cart, items, $visible, changeCartVisibility, removeItemFromCart }) => {
+const Cart = ({ cart, $visible, changeCartVisibility, removeItemFromCart, updateItemQuantity }) => {
     const [slideOut, setSlideOut] = useState(false);
 
     function handleButtonClick() {
+        console.table(cart);
         setSlideOut(true);
         setTimeout(() => {
             changeCartVisibility()
             setSlideOut(false);
         }, 1000);
     }
-
-    let itemCart = items.filter((item) => {
-        return cart.some((entry) => entry.id === item.id);
-    });
 
     return (
         <StyledCart $visible={$visible} $slideOut={slideOut}>
@@ -99,13 +119,19 @@ const Cart = ({ cart, items, $visible, changeCartVisibility, removeItemFromCart 
                     <Button onClick={handleButtonClick} $color={'black'}>x</Button>
                     <h3>Cart</h3>
                 </div>
+                <hr></hr>
                 <ul>
-                    {itemCart.map((item) => (
+                    {cart.map((item) => (
                         <li key={item.id}>
                             <div role='img' aria-label='' style={{ backgroundImage: `url(${item.image})`}}></div>
                             <h4>{item.title}</h4>
                             <div className="cartCardBottom">
-                                <Button onClick={() => removeItemFromCart(item.id)} $color={'red'}>Remove</Button>
+                                <div>
+                                    <span>x {item.quantity}</span>
+                                    <button className="incBtn" onClick={() => updateItemQuantity({ inc: 1, id: item.id})}>+</button>
+                                    <button className="incBtn" onClick={() => updateItemQuantity({ inc: -1, id: item.id})}>-</button>
+                                    <Button onClick={() => removeItemFromCart(item.id)} $color={'black'}>Remove</Button>
+                                </div>
                             </div>
                         </li>
                     ))}
@@ -117,10 +143,10 @@ const Cart = ({ cart, items, $visible, changeCartVisibility, removeItemFromCart 
 
 Cart.propTypes = {
     cart: PropTypes.array,
-    items: PropTypes.array,
     changeCartVisibility: PropTypes.func,
     $visible: PropTypes.any,
     removeItemFromCart: PropTypes.func,
+    updateItemQuantity: PropTypes.func,
 }
 
 export default Cart;

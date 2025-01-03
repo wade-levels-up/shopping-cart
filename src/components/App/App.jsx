@@ -99,20 +99,30 @@ function App() {
     if (itemExists) {
       let newCart = cart.map((entry) => {
         if (entry.id === item.id) {
-          return { id: entry.id, quantity: (+entry.quantity + +item.quantity) }
+          return { id: entry.id, quantity: (+entry.quantity + +item.quantity), image: entry.image, price: entry.price, title: entry.title }
         } else {
           return entry;
         }
       });
       setCart(newCart);
     } else {
-      setCart([...cart, { id: item.id, quantity: +item.quantity }]);
+      setCart([...cart, { id: item.id, quantity: +item.quantity, image: item.image, price: item.price, title: item.title}]);
     }
   }
 
   function removeItemFromCart(id) {
     let newCart = cart.filter((item) => item.id !== id);
     setCart(newCart);
+  }
+
+  function updateItemQuantity(item) {
+    setCart(cart.map((entry) => {
+      if (entry.id === item.id) {
+        if (entry.quantity + item.inc < 1 || entry.quantity + item.inc > 99) return entry;
+        return {...entry, quantity: entry.quantity + item.inc }
+      }
+      return entry;
+    }))
   }
 
   function changeCartVisibility() {
@@ -138,7 +148,7 @@ function App() {
       </header>
       <Menu cart={cart} totalCart={totalCart} changeCartVisibility={changeCartVisibility}/>
       <Outlet context={{items, loading, error, addItemToCart, totalCart}}/>
-      <Cart cart={cart} items={items} $visible={cartVisible} changeCartVisibility={changeCartVisibility} removeItemFromCart={removeItemFromCart}/>
+      <Cart cart={cart} items={items} $visible={cartVisible} changeCartVisibility={changeCartVisibility} removeItemFromCart={removeItemFromCart} updateItemQuantity={updateItemQuantity}/>
       <footer>
         <a href="https://github.com/wade-levels-up" target="_blank">
           <img src={githubLogo} alt="github logo" width="24" height="24"/>

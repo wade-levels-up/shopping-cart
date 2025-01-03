@@ -82,7 +82,7 @@ const StyledCard = styled.article`
 const Card = ({ bgColor = 'transparent', keyCard, title, image, desc, price}) => {
     const [quantity, setQuantity] = useState(1);
 
-    const { addItemToCart, totalCart } = useOutletContext();
+    const { addItemToCart } = useOutletContext();
 
     function handleInput(e) {
         setQuantity(e.target.value);
@@ -90,13 +90,8 @@ const Card = ({ bgColor = 'transparent', keyCard, title, image, desc, price}) =>
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(totalCart);
-        if (totalCart >= 999) {
-            alert('Cart cannot exceed 999 items');
-            return;
-        }
-        addItemToCart({ id: keyCard, quantity: quantity });
-      }
+        addItemToCart({ id: keyCard, quantity: quantity, image: image, price: price, title: title });
+    }
 
     return (
         <StyledCard style={{
