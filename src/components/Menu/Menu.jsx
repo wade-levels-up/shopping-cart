@@ -15,6 +15,7 @@ const StyledMenu = styled.nav`
     position: sticky;
     top: -2px;
     border-bottom: 2px solid whitesmoke;
+    z-index: 1;
 
     & span {
         display: flex;
@@ -48,7 +49,7 @@ const StyledIcon = styled(Icon)`
     }
 `
 
-const Menu = ({ bgColor = 'rgba(36, 36, 36, 0.7)', totalCart, changeCartVisibility}) => {
+const Menu = ({ bgColor = 'rgba(36, 36, 36, 0.9)', totalCart, changeCartVisibility}) => {
 
     return (
         <StyledMenu style={{

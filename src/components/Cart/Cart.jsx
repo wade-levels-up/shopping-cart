@@ -3,6 +3,12 @@ import PropTypes from "prop-types";
 import Button from "../Button/Button";
 import { slideInRight, slideOutRight } from "../../animations/animations";
 import { useState } from "react";
+import Icon from '@mdi/react';
+import { mdiShoppingOutline } from '@mdi/js';
+import amex from '../../assets/amex.svg';
+import visa from '../../assets/visa.svg';
+import paypal from '../../assets/paypal.svg';
+import mcard from '../../assets/mcard.svg';
 
 const StyledCart = styled.aside`
     background-color: rgba(0, 0, 0, 0.5);
@@ -24,7 +30,7 @@ const StyledCart = styled.aside`
         background-color: rgba(234, 234, 234, 0.95);
         display: flex;
         flex-direction: column;
-        padding: 16px;
+        padding: 10px;
         width: 80%;
         height: 100%;
         animation: ${props => props.$slideOut ? css`${slideOutRight} 1s ease-out forwards` : css`${slideInRight} 1s ease-out forwards`};
@@ -34,8 +40,9 @@ const StyledCart = styled.aside`
         display: flex;
         width: 100%;
         height: fit-content;
+        align-items: center;
         justify-content: flex-start;
-        gap: 16px;
+        gap: 12px;
         margin-bottom: 8px;
     }
 
@@ -47,26 +54,26 @@ const StyledCart = styled.aside`
         list-style: none;
         margin-top: 16px;
         overflow: scroll;
+        flex-grow: 1;
     }
 
     & h4 {
-        font-size: 12px;
+        font-size: 10px;
         text-wrap: pretty;
     }
 
     & li {
-        border: 1px solid black;
-        border-radius: 16px;
+        border-bottom: 1px dotted black;
         padding: 8px;
         display: grid;
-        grid-template-columns: 20% 80%; 
-        grid-template-rows: 60px 30px;
-        gap: 5px;
+        grid-template-columns: 65px 70%; 
+        grid-template-rows: 65px 30px;
+        gap: 8px;
     }
 
     & li div[role='img'] {
-        width: 50px;
-        height: 50px;
+        width: 65px;
+        height: 65px;
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
@@ -80,15 +87,19 @@ const StyledCart = styled.aside`
 
     & .cartCardBottom div {
         display: flex;
-        justify-content: space-evenly;
+        gap: 6px;
         align-items: center;
-        padding: 0px 5px;
     }
 
-    & .incBtn {
+    & .cartCardBottom span {
+        font-size: 14px;
+    }
+
+    & .incBtn, .decBtn {
         border-radius: 50%;
         width: 1.5rem;
         height: 1.5rem;
+        font-size: 16px;
         background-color: transparent;
         color: black;
         border: 2px solid black;
@@ -98,10 +109,32 @@ const StyledCart = styled.aside`
         background-color: transparent;
         outline: 2px solid blue;
     }
+
+    & .checkout {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    & .checkout span {
+        display: flex;
+        gap: 28px;
+        filter: invert(0%) sepia(0%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(100%);
+    }
+
+    & a {
+        text-decoration: none;
+        color: black;
+    }
 `
 
 const Cart = ({ cart, $visible, changeCartVisibility, removeItemFromCart, updateItemQuantity }) => {
     const [slideOut, setSlideOut] = useState(false);
+
+    const totalValue = cart.reduce((acc, cur) => {
+        return acc + cur.price * cur.quantity;
+    }, 0).toFixed(2);
 
     function handleButtonClick() {
         console.table(cart);
@@ -114,9 +147,10 @@ const Cart = ({ cart, $visible, changeCartVisibility, removeItemFromCart, update
 
     return (
         <StyledCart $visible={$visible} $slideOut={slideOut}>
-            <div className="slideOverRight" onAnimationEnd={console.log('it ended')}>
+            <div className="slideOverRight">
                 <div>
                     <Button onClick={handleButtonClick} $color={'black'}>x</Button>
+                    <Icon path={mdiShoppingOutline} size={1} />
                     <h3>Cart</h3>
                 </div>
                 <hr></hr>
@@ -127,15 +161,28 @@ const Cart = ({ cart, $visible, changeCartVisibility, removeItemFromCart, update
                             <h4>{item.title}</h4>
                             <div className="cartCardBottom">
                                 <div>
-                                    <span>x {item.quantity}</span>
-                                    <button className="incBtn" onClick={() => updateItemQuantity({ inc: 1, id: item.id})}>+</button>
-                                    <button className="incBtn" onClick={() => updateItemQuantity({ inc: -1, id: item.id})}>-</button>
-                                    <Button onClick={() => removeItemFromCart(item.id)} $color={'black'}>Remove</Button>
+                                    <div>
+                                        <span>x{item.quantity}</span>
+                                        <span>${item.price}</span>
+                                    </div>
+                                    <div>
+                                        <button className="incBtn" onClick={() => updateItemQuantity({ inc: 1, id: item.id})}>+</button>
+                                        <button className="decBtn" onClick={() => updateItemQuantity({ inc: -1, id: item.id})}>-</button>
+                                        <Button onClick={() => removeItemFromCart(item.id)} $color={'black'}>Remove</Button>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                     ))}
                 </ul>
+                <hr />
+                <div className="checkout">
+                    <div>
+                        <div>Total: ${totalValue}</div>
+                        <Button $color={'black'}><a target='_blank' href="https://www.youtube.com/watch?v=h_D3VFfhvs4">Checkout</a></Button>
+                    </div>
+                    <span><img src={visa} width='36px' alt="" /><img src={mcard} width='36px' alt="" /><img src={amex} width='36px' alt="" /><img src={paypal} width='36px' alt="" /></span>
+                </div>
             </div>
         </StyledCart>
     )

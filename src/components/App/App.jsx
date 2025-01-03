@@ -26,9 +26,12 @@ const StyledApp = styled.div`
   }
 
   & footer {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
     border-top: 1px dotted whitesmoke;
     text-align: center;
-    padding: 0.2rem;
   }
 
   & footer a {
@@ -149,7 +152,7 @@ function App() {
       <Menu cart={cart} totalCart={totalCart} changeCartVisibility={changeCartVisibility}/>
       <Outlet context={{items, loading, error, addItemToCart, totalCart}}/>
       <Cart cart={cart} items={items} $visible={cartVisible} changeCartVisibility={changeCartVisibility} removeItemFromCart={removeItemFromCart} updateItemQuantity={updateItemQuantity}/>
-      <footer>
+      <footer> 
         <a href="https://github.com/wade-levels-up" target="_blank">
           <img src={githubLogo} alt="github logo" width="24" height="24"/>
           <p>Made <em>by</em> Wade!</p>
