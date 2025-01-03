@@ -7,7 +7,7 @@ const StyledHome = styled.main`
     background-color: transparent;
     border-radius: 1rem;
     flex-grow: 1;
-    background-image: url('../src/assets/tu-tu-QZGQO3NvsLo-unsplash.jpg');
+    background-image: url('../src/assets/tutubackground.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
